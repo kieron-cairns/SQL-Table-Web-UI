@@ -2,7 +2,7 @@
         GetStocks: function () {
             $(document).ready(function () {
                 $.ajax({
-                    url: '/Home/IndexSearchTest',
+                    url: '/Home/Index',
                     //dataType: "json",
                     //method: 'post',
                     success: function (data) {
@@ -21,7 +21,7 @@
     },
     //Below method will call the GetSearchResultsFunction via ajax, with the name variable
     //that is set via the search input on the index page. Tble variable is also passed which contains the 
-    //initialiseation of a Jquery Datatable
+    //initalisation of a Jquery Datatable
 
     GetStocksInfo: function (tble, name) {
         $(document).ready(function () {
@@ -32,7 +32,7 @@
                 success: function (data) {
 
                     //below variables are set so that sorting will not change upon table refresh.
-                    //note that due to the table refreshing every 1.25 seconds, on some occasions functionallity
+                    //note that due to the table refreshing every 1.25 seconds, on some occasions functionality
                     //of deleting table rows will take the user 2 clicks. This will be investigated further for solutions :)
 
                     tble.DataTable().destroy();
@@ -78,12 +78,12 @@
         $("#name").val("");
         $("#description").val("");
         $("#myModal").modal('show');
-        $("#modal-title").html("Add Stcok");
+        $("#modal-title").html("Add Stock");
         $("#btnAddStock").attr("onClick", "StockSearchManagment.AddStock();");
         $("#btnAddStock").html("Add Stock");
     },
 
-    //AddStock method below is used to pass the variables the user has enetered
+    //AddStock method below is used to pass the variables the user has entered
     //to the DatabaseRepository via ajax. 
 
     AddStock: function () {
@@ -116,7 +116,6 @@
             success: (result) => {
 
                 //once item is successfully added, hide the AddStock partial view
-
                 $("#myModal").modal('hide');
             },
             error: (error) => {
@@ -126,7 +125,7 @@
     },
 
     //Below method is used to populate partial view with table row detials
-    //When a user wishes to edit the table row. This is achived by GetStockInfo being 
+    //When a user wishes to edit the table row. This is achieved by GetStockInfo being 
     //called from DatabaseRepository via ajax.
 
     GetStockInfo: function (ItemId) {
@@ -139,7 +138,7 @@
                     $("#myModal").modal('show');
                     $("#btnAddStock").attr("onClick", "StockSearchManagment.UpdateStockInfo();");
                     $("#btnAddStock").html("Update Stock");
-                    $("#modal-title").html("Add Stcok");
+                    $("#modal-title").html("Update Stock");
                 }
                 else {
                     alert(result.errorMessage);
@@ -187,7 +186,7 @@
 
                 //once item is successfully edited, hide the AddStock partial view
 
-
+                    StockSearchManagment.GetStocks();
                     $("#myModal").modal('hide');
                 }
                 else {

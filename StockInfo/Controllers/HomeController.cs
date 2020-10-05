@@ -76,7 +76,7 @@ namespace StockInfo.Controllers
                 var stockInfo = repository.GetStockInfo(itemId);
 
                 //render partial view with the info retrived by id.
-                var html = _viewRenderService.RenderToStringAsync("Home/ModalAddEditStockPartial", stockInfo);
+                var html = _viewRenderService.RenderToStringAsync("Home/ModalAddEditStockPartialSearch", stockInfo);
 
                 //return result in JSON format.
                 return Json(new { success = true, html = html.Result });
@@ -90,6 +90,7 @@ namespace StockInfo.Controllers
             
                       
         }
+
 
         public ActionResult UpdateStockInfo(int id, string name, string description)
         {

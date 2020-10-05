@@ -25,6 +25,9 @@ namespace StockInfo
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
+
+        //MainDbContext added to startup file so that the SQL connection can be reffered to from the app settings file.
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();

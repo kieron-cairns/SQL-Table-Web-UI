@@ -16,8 +16,6 @@ namespace StockInfo.Repository
 
         List<Stock> GetSearchResults(string name);
 
-
-
         List<Stock> GetStockInfo();
     }
 }

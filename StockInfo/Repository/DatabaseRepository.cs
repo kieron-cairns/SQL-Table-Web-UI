@@ -28,21 +28,19 @@ namespace StockInfo.Repository
 
         public List<Stock> GetSearchResults(string name)
         {
-            //This method will display all results within the SQL table that corelate with the given name variable/
+            //This method will display all results within the SQL table that correlate with the given name variable/
             //If there is no name give, then by default all results within the Stocks table will be displayed.
 
 
-            //SQL command text to selects all fields from Stocks table where the name paramater has a close
+            //SQL command text to selects all fields from Stocks table where the name parameter has a close
             //match to any of the column fields.
 
 
             string commandtext = "SELECT * FROM Stock WHERE ItemID LIKE @param OR Name LIKE @param OR Description LIKE @param";
 
-            //Use %  on each side of variable query to work with SQL LIKE command.
+            //Use %  on each side of name variable to work with SQL LIKE command.
 
             name = "%" + name + "%";
-
-
 
             //initialise new list instance of Stock model. 
 
@@ -64,7 +62,7 @@ namespace StockInfo.Repository
 
                 cmd.Parameters.AddWithValue("@param", name);
 
-                //Executre reader
+                //Execute reader
                 var reader = cmd.ExecuteReader();
 
                 //Read all rows until null
@@ -94,13 +92,19 @@ namespace StockInfo.Repository
 
         public Stock GetStockInfo(int itemId)
         {
+            //This method will get the relevant info for an item in the SQL table, with the given ItemId primary key. 
+            //This method will be called when the edit modal partial view. 
+
             string commandtext = string.Format("SELECT * FROM Stock where ItemId = {0} ", itemId);
+
+            //initialise new list instance of Stock model. 
 
             var result = new Stock();
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                //establish Sql Connection 
+                //Establish SQL connection and dependencies.
+
                 conn.Open();
 
                 SqlDependency.Start(connectionString);
@@ -108,16 +112,25 @@ namespace StockInfo.Repository
                 SqlCommand cmd = new SqlCommand(commandtext, conn);
                 SqlDependency dependency = new SqlDependency(cmd);
 
+                //Execute reader
+
                 var reader = cmd.ExecuteReader();
 
                 while (reader.Read())
                 {
                     result = new Stock
                     {
+                        //Assign class objects with the fields in search results table.
+
                         ItemId = (int)reader["ItemId"],
                         Name = reader["Name"].ToString(),
                         Description = reader["Description"].ToString()
                     };
+
+                    //Add class objects to the final search results list.
+
+
+                    //return search results
 
                     return result;
                 }
