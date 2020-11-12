@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace StockInfo.Models
 {
-    [Table("StockInfo")]
 
     //Class file Stock SQL table Model
 

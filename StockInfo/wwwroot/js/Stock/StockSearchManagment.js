@@ -26,7 +26,7 @@
     GetStocksInfo: function (tble, name) {
         $(document).ready(function () {
             $.ajax({
-                url: '/Home/GetSearchresults?name=' + name,
+                url: '/Home/GetSearchResults?name=' + name,
                 dataType: "json",
                 method: 'post',
                 success: function (data) {
